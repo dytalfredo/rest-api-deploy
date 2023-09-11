@@ -8,7 +8,7 @@ import { corsMiddleware } from './utils/cors.js'
 // const movies = JSON.parse(fs.readFileSync('./movies.json', 'utf-8')) es muy largo, se usa JSON
 
 const PORT = process.env.PORT ?? 3000
-const app = express()
+const app = express() // BUeno en la mañana me levanto a las 6 de la mañana, hago efercicio
 app.disable('x-powered-by')
 
 app.use(json())

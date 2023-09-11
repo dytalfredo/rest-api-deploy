@@ -17,7 +17,7 @@
         }
     </style>
     <script type="module">
-        fetch('http://localhost:3000/movies')
+        fetch('https://rest-api-prueba-menu-dev.fl0.io/movies')
         .then(res => res.json())
         .then(movies =>{
             const html = movies.map(movie =>{
@@ -39,7 +39,7 @@
                     const id = article.dataset.id
                     console.log("La ide es :", id)
 
-                    fetch(`http://localhost:3000/movies/${id}`,{
+                    fetch(`https://rest-api-prueba-menu-dev.fl0.io/movies/${id}`,{
                     method : 'DELETE'
                 })
                 .then(res => {
