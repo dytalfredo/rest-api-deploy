@@ -1,0 +1,36 @@
+### RECUPERAR TODAS LAS PELICULAS
+
+GET http://localhost:3000/movies
+
+
+### Recuperar una pelicula por id
+Get http://localhost:3000/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+
+###Recuperar todas las peliculas de un genero
+GET http://localhost:3000/movies?genre=action
+
+### Crear una pelicula
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+    "title": "aPulp Fiction",
+    "year": 1999,
+    "director": "aQuentin Tarantino",
+    "duration": 213123154,
+    "poster": "https://www.themoviedb.org/t/p/original/vQWk5YBFWF4bZaofAbv0tShwBvQ.jpg",
+    "genre": ["Crime", "Drama"],
+    "rate": 8.9
+  }
+
+### Actualizar una pelicula (una parte)
+
+PATCH http://localhost:3000/movies/47da0b03-0fe1-4816-b848-1d3016afd29b
+  Content-Type: application/json
+
+  {
+    "year":2000
+
+  }
+
+
