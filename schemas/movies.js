@@ -1,4 +1,4 @@
-const z = require('zod') // PARA VALIDAR FORMULARIO E INPUTS
+import z from 'zod' // PARA VALIDAR FORMULARIO E INPUTS
 
 const movieShema = z.object({
   title: z.string({
@@ -14,16 +14,11 @@ const movieShema = z.object({
 
 })
 
-function validateMovieRequestBody (object) {
+export function validateMovieRequestBody (object) {
   console.log(`Este es el esquema dentro del movies${movieShema}`)
   return movieShema.safeParse(object)
 }
 
-function validatePartialMovie (object) {
+export function validatePartialMovie (object) {
   return movieShema.partial().safeParse(object)
-}
-
-module.exports = {
-  validateMovieRequestBody,
-  validatePartialMovie
 }

@@ -1,14 +1,23 @@
-const express = require('express')
-const crypto = require('node:crypto')
-const cors = require('cors')
+import express, { json } from 'express'
+import { randomUUID } from 'node:crypto'
+import cors from 'cors'
+// import movies from './movies.json' with {type: 'json'} proximamente
+
+import { validateMovieRequestBody, validatePartialMovie } from './schemas/movies.js'
+
+import { createRequire } from 'node:module'
+
+const require = createRequire(import.meta.url)
 const movies = require('./movies.json')
-const { validateMovieRequestBody, validatePartialMovie } = require('./schemas/movies')
+
+// COMO LEER UN JSON EN ESMODULES import fs from 'node:fs'
+// const movies = JSON.parse(fs.readFileSync('./movies.json', 'utf-8')) es muy largo, se usa JSON
 
 const PORT = process.env.PORT ?? 3000
 const app = express()
 app.disable('x-powered-by')
 
-app.use(express.json())
+app.use(json())
 app.use(cors({
   origin: (origin, callback) => {
     const ACCEPTED_ORIGINS = [
@@ -71,7 +80,7 @@ app.post('/movies', (req, res) => {
     return res.status(422).json({ error: JSON.parse(result.error.message) })
   }
   const newMovie = {
-    id: crypto.randomUUID(),
+    id: randomUUID(),
     ...result.data
 
   }
