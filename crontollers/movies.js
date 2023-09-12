@@ -13,8 +13,8 @@ export class MovieController {
 
     const movie = await MovieModel.getById({ id })
     console.log(movie)
-    if (movie) return res.json(movie)
-    res.status(404).json({ message: 'Movie no existe' })
+    if (movie === false) return res.status(404).json({ message: 'Movie no existe' })
+    return res.json(movie)
   }
 
   static async create (req, res) {

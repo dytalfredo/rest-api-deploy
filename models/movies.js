@@ -14,8 +14,9 @@ export class MovieModel {
 
   static async getById ({ id }) {
     console.log('comenzo a hacer el getById')
-    const movie = movies.find(movie => movie.id === id)
-    return movie
+    const movieIndex = movies.findIndex(movie => movie.id === id)
+    if (movieIndex === -1) return false
+    return movies[movieIndex]
   }
 
   static async create ({ input }) {
