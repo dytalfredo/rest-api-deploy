@@ -14,6 +14,7 @@ moviesRouter.get('/', async (req, res) => {
 moviesRouter.get('/:id', async (req, res) => {
   const { id } = req.params
   const movie = await MovieModel.getById(id)
+  console.log(movie)
   if (movie) return res.json(movie)
   res.status(404).json({ message: 'Movie no existe' })
 })
