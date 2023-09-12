@@ -1,28 +1,19 @@
 import { Router } from 'express'
-import { readJSON } from '../utils/readJSON.js'
 import { validateMovieRequestBody, validatePartialMovie } from '../schemas/movies.js'
 import { randomUUID } from 'node:crypto'
-const movies = readJSON('../movies.json')
+import { MovieModel } from '../models/movies.js'
+
 export const moviesRouter = Router()
 
-moviesRouter.get('/', (req, res) => {
+moviesRouter.get('/', async (req, res) => {
   const { genre } = req.query
-  if (genre) {
-    const filteredMovies = movies.filter(
-      movie => movie.genre.some(g => g.toLowerCase() === genre.toLocaleLowerCase())
-    )
-
-    if (filteredMovies.length > 0) {
-      return res.json(filteredMovies)
-    }
-    return res.json({ message: 'No hay peliculas con este genero' })
-  }
+  const movies = await MovieModel.getAll({ genre })
   res.json(movies)
 })
 
 moviesRouter.get('/:id', (req, res) => {
   const { id } = req.params
-  const movie = movies.find(movie => movie.id === id)
+  const movie = MovieModel.getById(id)
   if (movie) return res.json(movie)
   res.status(404).json({ message: 'Movie no existe' })
 })
